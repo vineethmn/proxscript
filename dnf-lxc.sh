@@ -2,25 +2,19 @@
 
 # Update package index
 echo "Updating package index..."
-apt-get update
+dnf check-update
 
-# Install curl and git
-echo "Installing curl and git..."
-apt-get install -y curl git
+# Install OpenSSH server
+echo "Installing OpenSSH server..."
+dnf install -y openssh-server
 
-# Install Docker
-echo "Installing Docker..."
+# Enable and start the SSH service
+echo "Enabling and starting SSH service..."
+systemctl enable sshd
+systemctl start sshd
 
-# Set up the Docker repository
-curl -fsSL https://get.docker.com -o get-docker.sh
-sh get-docker.sh
+# Confirm SSH service status
+echo "Checking SSH service status..."
+systemctl status sshd
 
-# Add user to the docker group (optional)
-# Uncomment the following line if you want to add the current user to the docker group
-# usermod -aG docker $USER
-
-# Clean up
-echo "Cleaning up..."
-rm get-docker.sh
-
-echo "Installation complete."
+echo "SSH installation and setup complete."
