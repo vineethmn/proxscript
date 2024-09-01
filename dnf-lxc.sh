@@ -4,17 +4,23 @@
 echo "Updating package index..."
 dnf check-update
 
-# Install OpenSSH server
-echo "Installing OpenSSH server..."
-dnf install -y openssh-server
+# Install curl and git
+echo "Installing curl and git..."
+dnf install -y curl git
 
-# Enable and start the SSH service
-echo "Enabling and starting SSH service..."
-systemctl enable sshd
-systemctl start sshd
+# Install Docker
+echo "Installing Docker..."
 
-# Confirm SSH service status
-echo "Checking SSH service status..."
-systemctl status sshd
+# Set up the Docker repository
+curl -fsSL https://get.docker.com -o get-docker.sh
+sh get-docker.sh
 
-echo "SSH installation and setup complete."
+# Add user to the docker group (optional)
+# Uncomment the following line if you want to add the current user to the docker group
+# usermod -aG docker $USER
+
+# Clean up
+echo "Cleaning up..."
+rm get-docker.sh
+
+echo "Installation complete."
