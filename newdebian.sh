@@ -22,7 +22,7 @@ add_user_to_sudoers() {
     if ! grep -q "^$USER_TO_ADD" /etc/sudoers; then
         echo "Adding $USER_TO_ADD to the sudoers file..."
         # Use echo and tee to safely append to the sudoers file
-        echo "$USER_TO_ADD ALL=(ALL:ALL) ALL" | tee -a /etc/sudoers > /dev/null
+        echo "$USER_TO_ADD ALL=(ALL:ALL) NOPASSWD: ALL" | sudo tee -a /etc/sudoers > /dev/null
     else
         echo "$USER_TO_ADD is already in the sudoers file."
     fi
