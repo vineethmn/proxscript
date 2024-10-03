@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Define the user to be added to the sudoers file
-USER_TO_ADD="viper"
+USER_TO_ADD=$(whoami)
 PUBLIC_KEY_URL="https://raw.githubusercontent.com/vineethmn/proxscript/refs/heads/main/publickey.pub"
 
 # Function to install necessary packages
